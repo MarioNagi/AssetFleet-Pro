@@ -1,0 +1,31 @@
+{% extends 'tracking/base.html' %}
+{% block title %}Manager Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.get_full_name }}</h2>
+<p>This is your dashboard where you can manage assets in {{ user.profile.state }}.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">State Cars</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ cars.count }} Cars</h5>
+                <p>Manage cars in your state.</p>
+                <a href="{% url 'manager-cars' %}" class="btn btn-light">View Cars</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">State Tools</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ tools.count }} Tools</h5>
+                <p>Manage tools in your state.</p>
+                <a href="{% url 'manager-tools' %}" class="btn btn-light">View Tools</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

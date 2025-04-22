@@ -1,0 +1,23 @@
+{% extends 'tracking/base.html' %}
+{% block title %}User Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.get_full_name }}</h2>
+<p>This is your dashboard where you can manage your assigned car.</p>
+
+<div class="card text-white bg-primary mb-3">
+    <div class="card-header">Your Car</div>
+    <div class="card-body">
+        {% if cars %}
+            {% for car in cars %}
+                <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
+                <p class="card-text">Rego: {{ car.rego }}</p>
+                <p class="card-text">VIN: {{ car.vin_number }}</p>
+                <a href="{% url 'odometer-add' %}" class="btn btn-light">Add Odometer Reading</a>
+            {% endfor %}
+        {% else %}
+            <p>No cars assigned to you.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

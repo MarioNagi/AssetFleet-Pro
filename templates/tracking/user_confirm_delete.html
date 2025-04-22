@@ -1,0 +1,15 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Delete User{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Delete User</h2>
+    <p>Are you sure you want to delete the user "{{ user.username }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'user-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

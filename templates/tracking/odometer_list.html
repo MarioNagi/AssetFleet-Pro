@@ -1,0 +1,53 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Odometer Readings{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Odometer Readings</h2>
+
+    <form method="get" action="">
+        <div class="form-group">
+            <label for="car">Filter by Car:</label>
+            <select name="car" id="car" class="form-control" onchange="this.form.submit();">
+                <option value="">All Cars</option>
+                {% for car in cars %}
+                <option value="{{ car.id }}" {% if request.GET.car == car.id|stringformat:"s" %}selected{% endif %}>
+                    {{ car.make }} - {{ car.model }} ({{ car.rego }})
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Car</th>
+                <th>Reading Date</th>
+                <th>Odometer Reading</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reading in odometer_readings %}
+            <tr>
+                <td>{{ reading.car.rego }}</td>
+                <td>{{ reading.reading_date }}</td>
+                <td>{{ reading.reading_value }}</td>
+                <td>
+                    {% if user.is_superuser or user.is_staff %}
+                    <a href="{% url 'odometer-edit' reading.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'odometer-delete' reading.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No odometer readings found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

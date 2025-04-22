@@ -1,0 +1,47 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Add Maintenance Record{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Maintenance Record</h2>
+    <form method="post">
+        {% csrf_token %}
+        
+        <h4>Maintenance Details</h4>
+        {{ form.as_p }}
+
+        <h4>Maintenance Items</h4>
+        {{ item_formset.management_form }}
+        <div id="items">
+            {% for form in item_formset %}
+            <div class="form-row">
+                {{ form.as_p }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Maintenance Record</button>
+        <a href="{% url 'maintenance-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const addItemBtn = document.createElement("button");
+        addItemBtn.innerText = "Add Item";
+        addItemBtn.classList.add("btn", "btn-success", "mt-3");
+        document.getElementById("items").appendChild(addItemBtn);
+
+        addItemBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const totalForms = document.getElementById("id_items-TOTAL_FORMS");
+            const formCount = parseInt(totalForms.value);
+            const newForm = document.querySelector(".form-row").cloneNode(true);
+            newForm.querySelectorAll("input").forEach(input => input.value = "");
+            totalForms.value = formCount + 1;
+            document.getElementById("items").appendChild(newForm);
+        });
+    });
+</script>
+{% endblock %}

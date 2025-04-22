@@ -1,0 +1,48 @@
+
+{% extends 'tracking/base.html' %}
+{% load custom_filters %}
+{% block title %}Maintenance Records{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Maintenance Records</h2>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Car</th>
+                <th>Date</th>
+                <th>Mechanic Notes</th>
+                <th>Items</th>
+                <th>Total Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in maintenance_records %}
+            <tr>
+                <td>{{ record.car.rego }}</td>
+                <td>{{ record.last_service_date }}</td>
+                <td>{{ record.mechanic_notes }}</td>
+                <td>
+                    <ul>
+                        {% for item in record.items.all %}
+                        <li>{{ item.description }} - ${{ item.cost }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>${{ record.items.all|sum_attribute:'cost' }}</td>
+                <td>
+                    <a href="{% url 'maintenance-edit' record.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'maintenance-delete' record.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No maintenance records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

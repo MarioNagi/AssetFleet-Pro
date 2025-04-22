@@ -1,0 +1,63 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Dashboard | Koinonia Asset Tracker{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Dashboard</h1>
+
+<!-- Top Row: Tools and Cars -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">
+                <i class="fa fa-tools"></i> Tools
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ tools.count }} Tools</h5>
+                <p class="card-text">Manage all tools and their calibration statuses.</p>
+                <a href="{% url 'tool-list' %}" class="btn btn-light">View Tools</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">
+                <i class="fa fa-car"></i> Cars
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ cars.count }} Cars</h5>
+                <p class="card-text">Manage all cars and their maintenance records.</p>
+                <a href="{% url 'car_list' %}" class="btn btn-light">View Cars</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Row: Maintenance and Users -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">
+                <i class="fa fa-wrench"></i> Maintenance
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ maintenance_records.count }} Maintenance Records</h5>
+                <p class="card-text">Monitor and manage car maintenance details.</p>
+                <a href="{% url 'maintenance-list' %}" class="btn btn-light">View Maintenance</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">
+                <i class="fa fa-users"></i> Users
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ users.count }} Users</h5>
+                <p class="card-text">Manage users and their permissions.</p>
+                <a href="{% url 'user-list' %}" class="btn btn-light">Manage Users</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

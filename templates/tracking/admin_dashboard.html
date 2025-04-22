@@ -1,0 +1,42 @@
+{% extends 'tracking/base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ user.get_full_name }}</h2>
+<p>This is your dashboard where you have full access to the system.</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Tools</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ tools.count }} Tools</h5>
+                <p>Manage all tools across the system.</p>
+                <a href="{% url 'tool-list' %}" class="btn btn-light">View Tools</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Cars</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ cars.count }} Cars</h5>
+                <p>Manage all cars across the system.</p>
+                <a href="{% url 'car_list' %}" class="btn btn-light">View Cars</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-header">Users</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ users.count }} Users</h5>
+                <p>Manage all users across the system.</p>
+                <a href="{% url 'user-list' %}" class="btn btn-light">View Users</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

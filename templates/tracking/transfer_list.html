@@ -1,0 +1,36 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Transfers{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Transfers</h2>
+    <a href="{% url 'transfer-add' %}" class="btn btn-primary mb-3">Add Transfer</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Transfer Type</th>
+                <th>Item</th>
+                <th>From User</th>
+                <th>To User</th>
+                <th>Date of Transfer</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transfer in transfers %}
+            <tr>
+                <td>{{ transfer.transfer_type }}</td>
+                <td>{{ transfer.item_id }}</td>
+                <td>{{ transfer.from_user.get_full_name }}</td>
+                <td>{{ transfer.to_user.get_full_name }}</td>
+                <td>{{ transfer.date_of_transfer }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No transfers found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

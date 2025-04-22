@@ -1,0 +1,40 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Manager Tools{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Tools in {{ state }}</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Tool Name</th>
+                <th>Brand</th>
+                <th>State</th>
+                <th>Assigned User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tool in tools %}
+            <tr>
+                <td>{{ tool.serial_number }}</td>
+                <td>{{ tool.tool_name }}</td>
+                <td>{{ tool.brand }}</td>
+                <td>{{ tool.state }}</td>
+                <td>{{ tool.assigned_user.get_full_name }}</td>
+                <td>
+                    <a href="{% url 'tool-edit' tool.serial_number %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'tool-delete' tool.serial_number %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No tools found in your state.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

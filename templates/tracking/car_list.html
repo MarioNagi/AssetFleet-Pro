@@ -1,0 +1,65 @@
+{% extends 'tracking/base.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Cars</h2>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="{% url 'car-add' %}" class="btn btn-primary">Add Car</a>
+        <a href="{% url 'import' %}?type=Car" class="btn btn-secondary">Upload CSV</a>
+    </div>
+    <form method="get" action="">
+        <div class="form-group">
+            <label for="rego">Filter by Rego:</label>
+            <select name="rego" id="rego" class="form-control" onchange="this.form.submit();">
+                <option value="">All Regos</option>
+                {% for rego in regos %}
+                <option value="{{ rego }}" {% if request.GET.rego == rego %}selected{% endif %}>
+                    {{ rego }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </form>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Rego</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>VIN Number</th>
+                <th>State</th>
+                <th>Purchase Date</th>
+                <th>Purchase Price</th>
+                <th>Assigned User</th>
+                <th>Maintenance Sticker Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.rego }}</td>
+                <td>{{ car.make }}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.vin_number }}</td>
+                <td>{{ car.state }}</td>
+                <td>{{ car.purchase_date }}</td>
+                <td>${{ car.purchase_price }}</td>
+                <td>{{ car.assigned_user.get_full_name }}</td>
+                <td>{{ car.maintenance_sticker_date }}</td>
+                <td>
+                    <a href="{% url 'car-edit' car.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'car-delete' car.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="10" class="text-center">No cars found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
