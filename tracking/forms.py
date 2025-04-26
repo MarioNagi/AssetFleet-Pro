@@ -11,11 +11,17 @@ from .models import Profile
 # --------- Import Form ---------
 class ImportForm(forms.Form):
     FILE_TYPE_CHOICES = [
+        ('User', 'User'),
         ('Tool', 'Tool'),
         ('Car', 'Car'),
     ]
-    file = forms.FileField()
-    type = forms.ChoiceField(choices=FILE_TYPE_CHOICES)
+    FILE_FORMAT_CHOICES = [
+        ('csv', 'CSV'),
+        ('excel', 'Excel')
+    ]
+    file = forms.FileField(help_text='Select a CSV or Excel file to import')
+    type = forms.ChoiceField(choices=FILE_TYPE_CHOICES, help_text='Select the type of data to import')
+    format = forms.ChoiceField(choices=FILE_FORMAT_CHOICES, help_text='Select the file format')
 
     def __init__(self, *args, **kwargs):
         super(ImportForm, self).__init__(*args, **kwargs)
@@ -81,24 +87,27 @@ class MaintenanceForm(forms.ModelForm):
     class Meta:
         model = Maintenance
         fields = [
-            'car', 'tires_change_date', 'tires_alert_km', 'last_service_date', 'service_alert_km',
-            'mechanic_notes', 'tire_alignment', 'tire_status', 'monthly_odometer_alert',
-            'maintenance_actions', 'yearly_cost', 'accident_history'
+            'car', 'service_date', 'odometer_reading', 'service_type',
+            'invoice_number', 'service_provider', 'description',
+            'total_cost', 'documents'
         ]
         widgets = {
-            'tires_change_date': DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'last_service_date': DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'service_date': DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'documents': forms.FileInput(attrs={'class': 'form-control'})
         }
-    MaintenanceItemFormSet = inlineformset_factory(
-    Maintenance, MaintenanceItem,
-    fields=['description', 'cost'],
-    extra=1,  # Allows adding a new item dynamically
-    can_delete=True  # Allows removing items
-)
+
     def __init__(self, *args, **kwargs):
         super(MaintenanceForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.add_input(Submit('submit', 'Save Maintenance Record'))
+
+MaintenanceItemFormSet = inlineformset_factory(
+    Maintenance, MaintenanceItem,
+    fields=['description', 'item_type', 'quantity', 'unit_cost'],
+    extra=1,
+    can_delete=True
+)
 
 # --------- Transfer Form ---------
 class TransferForm(forms.ModelForm):
@@ -154,4 +163,4 @@ class UserUpdateForm(UserChangeForm):
 class MaintenanceItemForm(forms.ModelForm):
     class Meta:
         model = MaintenanceItem
-        fields = ['description', 'cost']
+        fields = ['description', 'item_type', 'quantity', 'unit_cost']

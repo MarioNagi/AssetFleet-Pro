@@ -12,7 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ tools.count }} Tools</h5>
                 <p>Manage all tools across the system.</p>
-                <a href="{% url 'tool-list' %}" class="btn btn-light">View Tools</a>
+                <a href="{% url 'tool_list' %}" class="btn btn-light">View Tools</a>
             </div>
         </div>
     </div>
@@ -34,9 +34,22 @@
             <div class="card-body">
                 <h5 class="card-title">{{ users.count }} Users</h5>
                 <p>Manage all users across the system.</p>
-                <a href="{% url 'user-list' %}" class="btn btn-light">View Users</a>
+                <a href="{% url 'user_list' %}" class="btn btn-light">View Users</a>
             </div>
         </div>
     </div>
+</div>
+
+  <!-- Maintenance Card -->
+  <div class="col-md-4">
+    <div class="card text-white bg-warning mb-3">
+      <div class="card-header">Maintenance</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ maintenance_records.count }} Records</h5>
+        <p>Track all maintenance items and costs.</p>
+        <a href="{% url 'maintenance_list' %}" class="btn btn-light">View Maintenance</a>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

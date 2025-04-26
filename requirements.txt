@@ -1,0 +1,21 @@
+Django==5.0.1
+django-allauth==0.57.0
+django-admin-interface==0.26.0
+django-colorfield==0.11.0
+django-crispy-forms==2.1
+crispy-bootstrap5==0.7
+django-filter==23.5
+django-ratelimit==4.1.0
+django-widget-tweaks==1.5.0
+celery==5.3.6
+redis==5.0.1
+gunicorn==21.2.0
+whitenoise==6.6.0
+psycopg2-binary==2.9.9
+pillow==10.2.0
+python-dotenv==1.0.0
+faker==22.0.0  # For demo data generation only
+sentry-sdk==1.39.1
+django-storages==1.14.2
+boto3==1.34.14  # For AWS S3 storage
+django-debug-toolbar==4.2.0  # For development only

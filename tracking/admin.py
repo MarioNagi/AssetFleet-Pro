@@ -50,11 +50,11 @@ class CarAdmin(admin.ModelAdmin):
 @admin.register(Maintenance)
 class MaintenanceAdmin(admin.ModelAdmin):
     list_display = (
-        'car', 'tires_change_date', 'last_service_date', 'tire_alignment',
-        'yearly_cost', 'monthly_odometer_alert'
+        'car', 'service_date', 'service_type', 'service_provider',
+        'total_cost', 'odometer_reading'
     )
-    list_filter = ('car', 'tires_change_date', 'last_service_date', 'tire_alignment')
-    search_fields = ('car__rego', 'mechanic_notes')
+    list_filter = ('car', 'service_date', 'service_type', 'service_provider')
+    search_fields = ('car__rego', 'service_provider', 'description', 'invoice_number')
 
 
 # --------- Odometer Reading Admin ---------

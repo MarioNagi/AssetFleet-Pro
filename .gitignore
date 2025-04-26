@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media
+static/admin/
+
+# Environment variables
+.env
+.venv
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+LINKEDIN_POST.md
+media/maintenance_docs/
+tracking/management/user import.xlsx
+logs/
+*.rar
+export 2.csv
+export 2.xlsx
+
+# Docker
+docker-compose.override.yml
+
+# Backup files
+backups/
+*.bak

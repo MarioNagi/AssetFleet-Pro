@@ -13,7 +13,7 @@
                 <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
                 <p class="card-text">Rego: {{ car.rego }}</p>
                 <p class="card-text">VIN: {{ car.vin_number }}</p>
-                <a href="{% url 'odometer-add' %}" class="btn btn-light">Add Odometer Reading</a>
+                <a href="{% url 'odometer_add' %}" class="btn btn-light">Add Odometer Reading</a>
             {% endfor %}
         {% else %}
             <p>No cars assigned to you.</p>
