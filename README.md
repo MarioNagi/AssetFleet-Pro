@@ -1,4 +1,4 @@
-# Asset Tracker
+# Asset Tracker Pro
 
 A comprehensive Django-based asset management system for tracking fleet vehicles and tools, managing maintenance schedules, and monitoring asset usage.
 
